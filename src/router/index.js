@@ -1,17 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import layout from '@/layout/index.vue'
 const publicRoutes = [
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: () => import('@/views/login')
+  },
+  {
+    path: '/',
+    name: 'layout',
+    component: layout
   }
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
 ]
 
 const router = createRouter({

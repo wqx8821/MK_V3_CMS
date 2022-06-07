@@ -5,7 +5,7 @@ import { isCheckTimeout } from '@/utils/auth'
 import md5 from 'md5'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 5000
 })
 

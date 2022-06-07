@@ -46,14 +46,12 @@
 
 <script setup>
 import { ref } from 'vue'
-// import { useStore } from 'vuex'
+import { useStore } from 'vuex'
 import { validatePassword } from './rules'
-import SvgIcon from '@/components/SvgIcon/index.vue'
-import { ElForm } from 'element-plus'
-// const store = useStore()
+const store = useStore()
 // 数据源
 const loginForm = ref({
-  username: 'admin',
+  username: 'super-admin',
   password: '123456'
 })
 // 验证规则
@@ -74,10 +72,27 @@ const rules = ref({
   ]
 })
 // 登录
-const validatorRef = ref()
-const loading = ref(false)
+const validatorRef = ref(null)
+let loading = ref(false)
 const handleLogin = () => {
-  // validatorRef.value?.validate((value) => {})
+  // 表单校验
+  validatorRef.value?.validate((value) => {
+    if (!value) return
+    // 登录操作
+    loading.value = true
+    store
+      .dispatch('user/login', loginForm.value)
+      .then((data) => {
+        loading.value = false
+        console.log(data)
+      })
+      .catch((err) => {
+        loading.value = false
+        console.log(err)
+      })
+    console.log(store)
+    // 登陆后操作
+  })
 }
 </script>
 
